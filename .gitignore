@@ -1,0 +1,10 @@
+.env
+*.env
+!.env.example
+.secrets/
+LocalDocs/
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+data/private/
