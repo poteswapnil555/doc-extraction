@@ -1,0 +1,18 @@
+{
+  "invoice_number": "INV-2024002",
+  "invoice_date": "2024-02-05",
+  "vendor_name": "Blue Harbor Trading",
+  "customer_name": "Alpha Retail Ltd",
+  "currency": "USD",
+  "line_items": [
+    {
+      "description": "Desk lamp",
+      "quantity": "7",
+      "unit_price": "139.02",
+      "amount": "973.14"
+    }
+  ],
+  "subtotal": "973.14",
+  "tax": "97.31",
+  "total": "1070.45"
+}

@@ -1,0 +1,36 @@
+{
+  "invoice_number": "INV-2024006",
+  "invoice_date": "2024-05-27",
+  "vendor_name": "Orbit Parts Co",
+  "customer_name": "Alpha Retail Ltd",
+  "currency": "USD",
+  "line_items": [
+    {
+      "description": "Wireless mouse",
+      "quantity": "4",
+      "unit_price": "28.82",
+      "amount": "115.28"
+    },
+    {
+      "description": "Printer paper (box)",
+      "quantity": "10",
+      "unit_price": "100.38",
+      "amount": "1003.80"
+    },
+    {
+      "description": "Desk lamp",
+      "quantity": "9",
+      "unit_price": "164.23",
+      "amount": "1478.07"
+    },
+    {
+      "description": "Whiteboard",
+      "quantity": "6",
+      "unit_price": "149.07",
+      "amount": "894.42"
+    }
+  ],
+  "subtotal": "3491.57",
+  "tax": "349.16",
+  "total": "3840.73"
+}

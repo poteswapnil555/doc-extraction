@@ -1,0 +1,18 @@
+{
+  "invoice_number": "INV-2024008",
+  "invoice_date": "2024-06-09",
+  "vendor_name": "Maple Leaf Tools",
+  "customer_name": "Cedar Workshop",
+  "currency": "USD",
+  "line_items": [
+    {
+      "description": "Desk lamp",
+      "quantity": "9",
+      "unit_price": "189.76",
+      "amount": "1707.84"
+    }
+  ],
+  "subtotal": "1707.84",
+  "tax": "170.78",
+  "total": "1878.62"
+}

@@ -1,0 +1,36 @@
+{
+  "invoice_number": "INV-2024011",
+  "invoice_date": "2024-02-12",
+  "vendor_name": "Blue Harbor Trading",
+  "customer_name": "Bright Cafe",
+  "currency": "USD",
+  "line_items": [
+    {
+      "description": "Toner cartridge",
+      "quantity": "7",
+      "unit_price": "182.29",
+      "amount": "1276.03"
+    },
+    {
+      "description": "Notebook set",
+      "quantity": "5",
+      "unit_price": "138.08",
+      "amount": "690.40"
+    },
+    {
+      "description": "Printer paper (box)",
+      "quantity": "6",
+      "unit_price": "126.66",
+      "amount": "759.96"
+    },
+    {
+      "description": "Desk lamp",
+      "quantity": "4",
+      "unit_price": "51.45",
+      "amount": "205.80"
+    }
+  ],
+  "subtotal": "2932.19",
+  "tax": "293.22",
+  "total": "3225.41"
+}

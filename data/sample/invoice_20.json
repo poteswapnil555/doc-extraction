@@ -1,0 +1,36 @@
+{
+  "invoice_number": "INV-2024020",
+  "invoice_date": "2024-07-05",
+  "vendor_name": "Northwind Supplies",
+  "customer_name": "Bright Cafe",
+  "currency": "USD",
+  "line_items": [
+    {
+      "description": "Wireless mouse",
+      "quantity": "5",
+      "unit_price": "156.74",
+      "amount": "783.70"
+    },
+    {
+      "description": "Whiteboard",
+      "quantity": "5",
+      "unit_price": "65.45",
+      "amount": "327.25"
+    },
+    {
+      "description": "Office chair",
+      "quantity": "10",
+      "unit_price": "114.81",
+      "amount": "1148.10"
+    },
+    {
+      "description": "Toner cartridge",
+      "quantity": "8",
+      "unit_price": "116.53",
+      "amount": "932.24"
+    }
+  ],
+  "subtotal": "3191.29",
+  "tax": "319.13",
+  "total": "3510.42"
+}

@@ -1,0 +1,36 @@
+{
+  "invoice_number": "INV-2024003",
+  "invoice_date": "2024-01-24",
+  "vendor_name": "Orbit Parts Co",
+  "customer_name": "Bright Cafe",
+  "currency": "USD",
+  "line_items": [
+    {
+      "description": "Office chair",
+      "quantity": "4",
+      "unit_price": "193.03",
+      "amount": "772.12"
+    },
+    {
+      "description": "Toner cartridge",
+      "quantity": "1",
+      "unit_price": "191.1",
+      "amount": "191.1"
+    },
+    {
+      "description": "Notebook set",
+      "quantity": "10",
+      "unit_price": "131.98",
+      "amount": "1319.80"
+    },
+    {
+      "description": "Whiteboard",
+      "quantity": "1",
+      "unit_price": "74.44",
+      "amount": "74.44"
+    }
+  ],
+  "subtotal": "2357.46",
+  "tax": "235.75",
+  "total": "2593.21"
+}

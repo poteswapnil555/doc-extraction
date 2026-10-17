@@ -1,0 +1,24 @@
+{
+  "invoice_number": "INV-2024017",
+  "invoice_date": "2024-09-21",
+  "vendor_name": "Northwind Supplies",
+  "customer_name": "Bright Cafe",
+  "currency": "USD",
+  "line_items": [
+    {
+      "description": "Desk lamp",
+      "quantity": "6",
+      "unit_price": "88.75",
+      "amount": "532.50"
+    },
+    {
+      "description": "Wireless mouse",
+      "quantity": "8",
+      "unit_price": "54.9",
+      "amount": "439.2"
+    }
+  ],
+  "subtotal": "971.70",
+  "tax": "97.17",
+  "total": "1068.87"
+}

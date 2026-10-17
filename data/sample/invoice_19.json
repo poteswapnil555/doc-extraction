@@ -1,0 +1,24 @@
+{
+  "invoice_number": "INV-2024019",
+  "invoice_date": "2024-04-26",
+  "vendor_name": "Blue Harbor Trading",
+  "customer_name": "Echo Studio",
+  "currency": "USD",
+  "line_items": [
+    {
+      "description": "Wireless mouse",
+      "quantity": "4",
+      "unit_price": "65.94",
+      "amount": "263.76"
+    },
+    {
+      "description": "Whiteboard",
+      "quantity": "4",
+      "unit_price": "133.29",
+      "amount": "533.16"
+    }
+  ],
+  "subtotal": "796.92",
+  "tax": "79.69",
+  "total": "876.61"
+}

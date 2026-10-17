@@ -1,0 +1,30 @@
+{
+  "invoice_number": "INV-2024001",
+  "invoice_date": "2024-01-30",
+  "vendor_name": "Orbit Parts Co",
+  "customer_name": "Bright Cafe",
+  "currency": "USD",
+  "line_items": [
+    {
+      "description": "Printer paper (box)",
+      "quantity": "1",
+      "unit_price": "25.73",
+      "amount": "25.73"
+    },
+    {
+      "description": "USB cable",
+      "quantity": "9",
+      "unit_price": "32.84",
+      "amount": "295.56"
+    },
+    {
+      "description": "Wireless mouse",
+      "quantity": "6",
+      "unit_price": "192.96",
+      "amount": "1157.76"
+    }
+  ],
+  "subtotal": "1479.05",
+  "tax": "147.90",
+  "total": "1626.95"
+}

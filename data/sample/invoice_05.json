@@ -1,0 +1,30 @@
+{
+  "invoice_number": "INV-2024005",
+  "invoice_date": "2024-08-06",
+  "vendor_name": "Maple Leaf Tools",
+  "customer_name": "Delta Clinic",
+  "currency": "USD",
+  "line_items": [
+    {
+      "description": "Desk lamp",
+      "quantity": "2",
+      "unit_price": "186.93",
+      "amount": "373.86"
+    },
+    {
+      "description": "Notebook set",
+      "quantity": "1",
+      "unit_price": "69.48",
+      "amount": "69.48"
+    },
+    {
+      "description": "Wireless mouse",
+      "quantity": "8",
+      "unit_price": "176.23",
+      "amount": "1409.84"
+    }
+  ],
+  "subtotal": "1853.18",
+  "tax": "185.32",
+  "total": "2038.50"
+}
