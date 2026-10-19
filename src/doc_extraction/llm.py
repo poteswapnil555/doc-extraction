@@ -15,6 +15,14 @@ MAX_WAIT_SECONDS = 120.0
 _sleep = time.sleep  # replaced in tests
 
 
+def request_timeout() -> float:
+    """Seconds before one LLM request is abandoned (LLM_TIMEOUT_SECONDS, default 60)."""
+    try:
+        return float(env("LLM_TIMEOUT_SECONDS", "60"))
+    except ValueError:
+        raise RuntimeError("LLM_TIMEOUT_SECONDS must be a number")
+
+
 def is_rate_limit(exc: Exception) -> bool:
     return getattr(exc, "status_code", None) == 429
 
@@ -60,19 +68,22 @@ class OpenAICompatibleClient:
         from openai import AzureOpenAI, OpenAI
 
         if llm_provider() == "azure":
+            if not env("AZURE_OPENAI_DEPLOYMENT"):
+                raise RuntimeError("AZURE_OPENAI_DEPLOYMENT is not set")
             auth = (
                 {"api_key": env("AZURE_OPENAI_API_KEY")}
                 if azure_auth_mode() == "key"
                 else {"azure_ad_token_provider": build_token_provider()}
             )
             self._client = AzureOpenAI(
+                timeout=request_timeout(),
                 azure_endpoint=env("AZURE_OPENAI_ENDPOINT"),
                 api_version=env("AZURE_OPENAI_API_VERSION", "2024-06-01"),
                 **auth,
             )
             self._model = env("AZURE_OPENAI_DEPLOYMENT", "")
         else:
-            self._client = OpenAI(api_key=env("OPENAI_API_KEY"), base_url=env("OPENAI_BASE_URL"))
+            self._client = OpenAI(api_key=env("OPENAI_API_KEY"), base_url=env("OPENAI_BASE_URL"), timeout=request_timeout())
             self._model = env("OPENAI_MODEL", "gpt-4o-mini")
 
     def complete(self, system: str, user: str) -> str:

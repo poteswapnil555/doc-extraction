@@ -14,7 +14,11 @@ def main(argv: list[str]) -> int:
     if not argv:
         print(__doc__)
         return 2
-    ocr, llm = get_ocr_engine(), OpenAICompatibleClient()
+    try:
+        ocr, llm = get_ocr_engine(), OpenAICompatibleClient()
+    except (RuntimeError, ValueError, ImportError) as e:
+        print(f"Configuration error: {e}", file=sys.stderr)
+        return 2
     for name in argv:
         r = process_file(Path(name), ocr, llm)
         print(json.dumps({
