@@ -43,6 +43,27 @@ def compare(pred: Invoice | None, truth: Invoice) -> dict[str, bool]:
     return result
 
 
+def _jsonable(v):
+    if isinstance(v, Decimal):
+        return str(v)
+    if hasattr(v, "isoformat"):
+        return v.isoformat()
+    if isinstance(v, list):
+        return [_jsonable(x) for x in v]
+    if hasattr(v, "model_dump"):
+        return {k: _jsonable(x) for k, x in v.model_dump().items()}
+    return v
+
+
+def wrong_fields(pred: Invoice | None, truth: Invoice, correct: dict[str, bool]) -> list[dict]:
+    """Expected vs predicted value for every wrong field (predicted is null if nothing was produced)."""
+    return [
+        {"field": f, "expected": _jsonable(getattr(truth, f)), "predicted": _jsonable(getattr(pred, f)) if pred else None}
+        for f in FIELDS
+        if not correct[f]
+    ]
+
+
 @dataclass
 class Report:
     mode: str
@@ -54,9 +75,12 @@ class Report:
     correct_docs: int = 0
     correct_docs_flagged: int = 0
     no_output: int = 0
+    details: list[dict] = field(default_factory=list)  # one entry per document, saved with --out
 
-    def add(self, fields: dict[str, bool], needs_review: bool, produced: bool) -> None:
+    def add(self, fields: dict[str, bool], needs_review: bool, produced: bool, detail: dict | None = None) -> None:
         self.docs += 1
+        if detail is not None:
+            self.details.append(detail)
         self.no_output += not produced
         for f, ok in fields.items():
             self.field_correct[f] += ok
@@ -106,7 +130,17 @@ def evaluate(sample_dir: Path, ocr: OcrEngine, llm, mode: str, delay: float = 0.
         if isinstance(llm, MockLLM):
             llm.reply = truth_text
         result = process_file(doc, ocr, llm)
-        report.add(compare(result.invoice, Invoice.model_validate_json(truth_text)), result.needs_review, result.invoice is not None)
+        truth = Invoice.model_validate_json(truth_text)
+        correct = compare(result.invoice, truth)
+        report.add(correct, result.needs_review, result.invoice is not None, {
+            "file": doc.name,
+            "all_correct": all(correct.values()),
+            "wrong_fields": wrong_fields(result.invoice, truth, correct),
+            "needs_review": result.needs_review,
+            "review_reasons": result.reasons,
+            "attempts": result.attempts,
+            "error": result.error,
+        })
         if progress:
             progress(i, len(jobs))
         if delay > 0 and i < len(jobs):
@@ -122,7 +156,7 @@ def main(argv: list[str]) -> int:
     ap.add_argument("--dir", type=Path, default=Path("data/sample"))
     ap.add_argument("--delay", type=float, default=0.0, metavar="SECONDS",
                     help="pause between documents, e.g. 13 for a 5 requests/minute limit")
-    ap.add_argument("--out", type=Path, help="optional path to save the summary as JSON")
+    ap.add_argument("--out", type=Path, help="optional path to save the summary plus per-document details as JSON")
     args = ap.parse_args(argv)
 
     if args.mock:
@@ -142,10 +176,19 @@ def main(argv: list[str]) -> int:
     def show(done: int, total: int) -> None:
         print(f"{done}/{total} done", file=sys.stderr, flush=True)
 
-    summary = evaluate(args.dir, get_ocr_engine(), llm, mode, delay=args.delay, progress=show).summary()
+    try:
+        ocr = get_ocr_engine()
+    except (RuntimeError, ValueError, ImportError) as e:
+        print(f"Cannot start OCR engine: {e}", file=sys.stderr)
+        return 2
+    report = evaluate(args.dir, ocr, llm, mode, delay=args.delay, progress=show)
+    if report.docs == 0:
+        print(f"No invoice_*.json + .pdf/.png pairs found in {args.dir}", file=sys.stderr)
+        return 2
+    summary = report.summary()
     print(json.dumps(summary, indent=2))
     if args.out:
-        args.out.write_text(json.dumps(summary, indent=2), encoding="utf-8")
+        args.out.write_text(json.dumps({**summary, "documents_detail": report.details}, indent=2), encoding="utf-8")
     return 0
 
 
