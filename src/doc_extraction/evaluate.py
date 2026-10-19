@@ -9,6 +9,7 @@ import argparse
 import json
 import re
 import sys
+import time
 from dataclasses import dataclass, field
 from decimal import Decimal
 from pathlib import Path
@@ -91,17 +92,25 @@ class MockLLM:
         return self.reply
 
 
-def evaluate(sample_dir: Path, ocr: OcrEngine, llm, mode: str) -> Report:
+def evaluate(sample_dir: Path, ocr: OcrEngine, llm, mode: str, delay: float = 0.0, sleep=time.sleep, progress=None) -> Report:
+    """delay: seconds to pause between documents (for rate-limited free tiers).
+    progress: optional callable(done, total), called after each document."""
     report = Report(mode=mode)
+    jobs = []
     for truth_path in sorted(sample_dir.glob("invoice_*.json")):
         doc = next((p for p in truth_path.parent.glob(truth_path.stem + ".*") if p.suffix in {".pdf", ".png"}), None)
-        if doc is None:
-            continue
+        if doc is not None:
+            jobs.append((truth_path, doc))
+    for i, (truth_path, doc) in enumerate(jobs, start=1):
         truth_text = truth_path.read_text(encoding="utf-8")
         if isinstance(llm, MockLLM):
             llm.reply = truth_text
         result = process_file(doc, ocr, llm)
         report.add(compare(result.invoice, Invoice.model_validate_json(truth_text)), result.needs_review, result.invoice is not None)
+        if progress:
+            progress(i, len(jobs))
+        if delay > 0 and i < len(jobs):
+            sleep(delay)
     return report
 
 
@@ -111,6 +120,8 @@ def main(argv: list[str]) -> int:
     group.add_argument("--mock", action="store_true", help="no key needed; NOT an accuracy measurement")
     group.add_argument("--live", action="store_true", help="use the LLM configured by environment variables")
     ap.add_argument("--dir", type=Path, default=Path("data/sample"))
+    ap.add_argument("--delay", type=float, default=0.0, metavar="SECONDS",
+                    help="pause between documents, e.g. 13 for a 5 requests/minute limit")
     ap.add_argument("--out", type=Path, help="optional path to save the summary as JSON")
     args = ap.parse_args(argv)
 
@@ -128,7 +139,10 @@ def main(argv: list[str]) -> int:
         mode = "live"
         print("MODE: live -- real LLM from environment variables.")
 
-    summary = evaluate(args.dir, get_ocr_engine(), llm, mode).summary()
+    def show(done: int, total: int) -> None:
+        print(f"{done}/{total} done", file=sys.stderr, flush=True)
+
+    summary = evaluate(args.dir, get_ocr_engine(), llm, mode, delay=args.delay, progress=show).summary()
     print(json.dumps(summary, indent=2))
     if args.out:
         args.out.write_text(json.dumps(summary, indent=2), encoding="utf-8")

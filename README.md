@@ -67,6 +67,8 @@ Regenerate the sample data: `python -m doc_extraction.synthetic`.
 
 ## Evaluation results
 Run `python -m doc_extraction.evaluate --live` (real LLM, from environment variables) on the 20 synthetic documents.
+On a rate-limited free tier add `--delay SECONDS` (for example `--delay 13` for 5 requests/minute); the client also waits and retries on HTTP 429 (up to 6 times).
+Progress ("3/20 done") is printed to stderr.
 `--mock` only checks the plumbing (the fake LLM returns the ground truth) and is **not** an accuracy measurement.
 
 | Measure (20 synthetic docs, live LLM) | Result |
