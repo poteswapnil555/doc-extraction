@@ -1,36 +1,30 @@
 {
   "invoice_number": "INV-2024013",
-  "invoice_date": "2024-07-23",
-  "vendor_name": "Sunrise Stationery",
-  "customer_name": "Alpha Retail Ltd",
+  "invoice_date": "2024-12-19",
+  "vendor_name": "Orbit Parts Co",
+  "customer_name": "Echo Studio",
   "currency": "USD",
   "line_items": [
     {
-      "description": "Wireless mouse",
-      "quantity": "3",
-      "unit_price": "170.91",
-      "amount": "512.73"
-    },
-    {
       "description": "Notebook set",
-      "quantity": "10",
-      "unit_price": "19.69",
-      "amount": "196.90"
-    },
-    {
-      "description": "Toner cartridge",
-      "quantity": "8",
-      "unit_price": "185.26",
-      "amount": "1482.08"
-    },
-    {
-      "description": "Printer paper (box)",
       "quantity": "7",
-      "unit_price": "132.43",
-      "amount": "927.01"
+      "unit_price": "177.17",
+      "amount": "1240.19"
+    },
+    {
+      "description": "Office chair",
+      "quantity": "6",
+      "unit_price": "187.57",
+      "amount": "1125.42"
+    },
+    {
+      "description": "Desk lamp",
+      "quantity": "6",
+      "unit_price": "43.12",
+      "amount": "258.72"
     }
   ],
-  "subtotal": "3118.72",
-  "tax": "311.87",
-  "total": "3430.59"
+  "subtotal": "2624.33",
+  "tax": "262.43",
+  "total": "2886.76"
 }

@@ -2,7 +2,7 @@
   "invoice_number": "INV-2024010",
   "invoice_date": "2024-09-11",
   "vendor_name": "Northwind Supplies",
-  "customer_name": "Bright Cafe",
+  "customer_name": null,
   "currency": "USD",
   "line_items": [
     {

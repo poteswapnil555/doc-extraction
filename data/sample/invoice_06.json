@@ -1,36 +1,36 @@
 {
   "invoice_number": "INV-2024006",
-  "invoice_date": "2024-05-27",
-  "vendor_name": "Orbit Parts Co",
-  "customer_name": "Alpha Retail Ltd",
+  "invoice_date": "2024-08-17",
+  "vendor_name": "Maple Leaf Tools",
+  "customer_name": "Echo Studio",
   "currency": "USD",
   "line_items": [
     {
-      "description": "Wireless mouse",
-      "quantity": "4",
-      "unit_price": "28.82",
-      "amount": "115.28"
+      "description": "Whiteboard",
+      "quantity": "3",
+      "unit_price": "81.98",
+      "amount": "245.94"
     },
     {
       "description": "Printer paper (box)",
-      "quantity": "10",
-      "unit_price": "100.38",
-      "amount": "1003.80"
+      "quantity": "2",
+      "unit_price": "190.22",
+      "amount": "380.44"
+    },
+    {
+      "description": "Toner cartridge",
+      "quantity": "5",
+      "unit_price": "174.09",
+      "amount": "870.45"
     },
     {
       "description": "Desk lamp",
-      "quantity": "9",
-      "unit_price": "164.23",
-      "amount": "1478.07"
-    },
-    {
-      "description": "Whiteboard",
-      "quantity": "6",
-      "unit_price": "149.07",
-      "amount": "894.42"
+      "quantity": "8",
+      "unit_price": "114.55",
+      "amount": "916.40"
     }
   ],
-  "subtotal": "3491.57",
-  "tax": "349.16",
-  "total": "3840.73"
+  "subtotal": "2413.23",
+  "tax": "241.32",
+  "total": "2654.55"
 }

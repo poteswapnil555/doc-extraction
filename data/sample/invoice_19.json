@@ -1,24 +1,24 @@
 {
   "invoice_number": "INV-2024019",
-  "invoice_date": "2024-04-26",
-  "vendor_name": "Blue Harbor Trading",
-  "customer_name": "Echo Studio",
+  "invoice_date": "2024-09-21",
+  "vendor_name": "Northwind Supplies",
+  "customer_name": "Bright Cafe",
   "currency": "USD",
   "line_items": [
     {
-      "description": "Wireless mouse",
-      "quantity": "4",
-      "unit_price": "65.94",
-      "amount": "263.76"
+      "description": "Desk lamp",
+      "quantity": "6",
+      "unit_price": "88.75",
+      "amount": "532.50"
     },
     {
-      "description": "Whiteboard",
-      "quantity": "4",
-      "unit_price": "133.29",
-      "amount": "533.16"
+      "description": "Wireless mouse",
+      "quantity": "8",
+      "unit_price": "54.9",
+      "amount": "439.2"
     }
   ],
-  "subtotal": "796.92",
-  "tax": "79.69",
-  "total": "876.61"
+  "subtotal": "971.70",
+  "tax": "97.17",
+  "total": "1068.87"
 }

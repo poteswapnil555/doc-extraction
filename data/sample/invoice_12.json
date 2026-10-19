@@ -1,24 +1,30 @@
 {
   "invoice_number": "INV-2024012",
-  "invoice_date": "2024-05-24",
-  "vendor_name": "Northwind Supplies",
+  "invoice_date": "2024-09-05",
+  "vendor_name": "Orbit Parts Co",
   "customer_name": "Bright Cafe",
   "currency": "USD",
   "line_items": [
     {
-      "description": "USB cable",
-      "quantity": "8",
-      "unit_price": "195.04",
-      "amount": "1560.32"
+      "description": "Toner cartridge",
+      "quantity": "2",
+      "unit_price": "59.74",
+      "amount": "119.48"
     },
     {
-      "description": "Office chair",
+      "description": "Desk lamp",
       "quantity": "3",
-      "unit_price": "88.09",
-      "amount": "264.27"
+      "unit_price": "78",
+      "amount": "234"
+    },
+    {
+      "description": "Whiteboard",
+      "quantity": "4",
+      "unit_price": "5.95",
+      "amount": "23.80"
     }
   ],
-  "subtotal": "1824.59",
-  "tax": "182.46",
-  "total": "2007.05"
+  "subtotal": "377.28",
+  "tax": "37.73",
+  "total": "415.01"
 }

@@ -16,6 +16,13 @@ def _money_forms(value) -> list[str]:
     return [q, q[:-3]] if q.endswith(".00") else [q]
 
 
+DATE_FORMATS = ["%Y-%m-%d", "%d %b %Y", "%d/%m/%Y", "%B %d, %Y"]  # slash dates are day/month/year
+
+
+def _date_printed(d, text: str) -> bool:
+    return any(_in_text(d.strftime(f), text) for f in DATE_FORMATS)
+
+
 def _in_text(needle: str, haystack: str) -> bool:
     return _norm(needle) in _norm(haystack)
 
@@ -28,12 +35,13 @@ def field_confidence(inv: Invoice, text: str) -> dict[str, float]:
 
     conf = {
         "invoice_number": float(_in_text(inv.invoice_number, text)),
-        "invoice_date": float(_in_text(inv.invoice_date.isoformat(), text)),
+        "invoice_date": float(_date_printed(inv.invoice_date, text)),
         "vendor_name": float(_in_text(inv.vendor_name, text)),
         "subtotal": money(inv.subtotal),
-        "tax": money(inv.tax),
         "total": money(inv.total),
     }
+    if inv.tax != 0:  # a missing tax line legitimately means 0
+        conf["tax"] = money(inv.tax)
     if inv.customer_name:
         conf["customer_name"] = float(_in_text(inv.customer_name, text))
     for i, li in enumerate(inv.line_items):

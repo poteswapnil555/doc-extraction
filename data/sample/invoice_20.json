@@ -1,36 +1,30 @@
 {
   "invoice_number": "INV-2024020",
-  "invoice_date": "2024-07-05",
-  "vendor_name": "Northwind Supplies",
-  "customer_name": "Bright Cafe",
+  "invoice_date": "2024-07-06",
+  "vendor_name": "Blue Harbor Trading",
+  "customer_name": null,
   "currency": "USD",
   "line_items": [
     {
+      "description": "Printer paper (box)",
+      "quantity": "1",
+      "unit_price": "175.05",
+      "amount": "175.05"
+    },
+    {
       "description": "Wireless mouse",
       "quantity": "5",
-      "unit_price": "156.74",
-      "amount": "783.70"
+      "unit_price": "31.82",
+      "amount": "159.10"
     },
     {
-      "description": "Whiteboard",
+      "description": "Notebook set",
       "quantity": "5",
-      "unit_price": "65.45",
-      "amount": "327.25"
-    },
-    {
-      "description": "Office chair",
-      "quantity": "10",
-      "unit_price": "114.81",
-      "amount": "1148.10"
-    },
-    {
-      "description": "Toner cartridge",
-      "quantity": "8",
-      "unit_price": "116.53",
-      "amount": "932.24"
+      "unit_price": "171.86",
+      "amount": "859.30"
     }
   ],
-  "subtotal": "3191.29",
-  "tax": "319.13",
-  "total": "3510.42"
+  "subtotal": "1193.45",
+  "tax": "119.34",
+  "total": "1312.79"
 }

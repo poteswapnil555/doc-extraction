@@ -1,18 +1,36 @@
 {
   "invoice_number": "INV-2024008",
-  "invoice_date": "2024-06-09",
-  "vendor_name": "Maple Leaf Tools",
-  "customer_name": "Cedar Workshop",
+  "invoice_date": "2024-08-21",
+  "vendor_name": "Northwind Supplies",
+  "customer_name": "Alpha Retail Ltd",
   "currency": "USD",
   "line_items": [
     {
-      "description": "Desk lamp",
+      "description": "Toner cartridge",
       "quantity": "9",
       "unit_price": "189.76",
       "amount": "1707.84"
+    },
+    {
+      "description": "Office chair",
+      "quantity": "6",
+      "unit_price": "113.45",
+      "amount": "680.70"
+    },
+    {
+      "description": "Wireless mouse",
+      "quantity": "6",
+      "unit_price": "196.76",
+      "amount": "1180.56"
+    },
+    {
+      "description": "Whiteboard",
+      "quantity": "8",
+      "unit_price": "192.02",
+      "amount": "1536.16"
     }
   ],
-  "subtotal": "1707.84",
-  "tax": "170.78",
-  "total": "1878.62"
+  "subtotal": "5105.26",
+  "tax": "510.53",
+  "total": "5615.79"
 }

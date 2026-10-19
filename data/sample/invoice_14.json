@@ -1,36 +1,18 @@
 {
   "invoice_number": "INV-2024014",
-  "invoice_date": "2024-01-01",
-  "vendor_name": "Orbit Parts Co",
-  "customer_name": "Bright Cafe",
+  "invoice_date": "2024-07-22",
+  "vendor_name": "Sunrise Stationery",
+  "customer_name": "Delta Clinic",
   "currency": "USD",
   "line_items": [
     {
-      "description": "Toner cartridge",
-      "quantity": "4",
-      "unit_price": "146.38",
-      "amount": "585.52"
-    },
-    {
-      "description": "Office chair",
-      "quantity": "3",
-      "unit_price": "38.02",
-      "amount": "114.06"
-    },
-    {
-      "description": "Desk lamp",
-      "quantity": "6",
-      "unit_price": "198.84",
-      "amount": "1193.04"
-    },
-    {
       "description": "Whiteboard",
-      "quantity": "1",
-      "unit_price": "35.54",
-      "amount": "35.54"
+      "quantity": "9",
+      "unit_price": "130.57",
+      "amount": "1175.13"
     }
   ],
-  "subtotal": "1928.16",
-  "tax": "192.82",
-  "total": "2120.98"
+  "subtotal": "1175.13",
+  "tax": "0",
+  "total": "1175.13"
 }

@@ -1,18 +1,18 @@
 {
   "invoice_number": "INV-2024015",
-  "invoice_date": "2024-02-06",
-  "vendor_name": "Blue Harbor Trading",
-  "customer_name": "Echo Studio",
+  "invoice_date": "2024-04-07",
+  "vendor_name": "Northwind Supplies",
+  "customer_name": null,
   "currency": "USD",
   "line_items": [
     {
-      "description": "Wireless mouse",
-      "quantity": "10",
-      "unit_price": "10.35",
-      "amount": "103.50"
+      "description": "Whiteboard",
+      "quantity": "7",
+      "unit_price": "22.39",
+      "amount": "156.73"
     }
   ],
-  "subtotal": "103.50",
-  "tax": "10.35",
-  "total": "113.85"
+  "subtotal": "156.73",
+  "tax": "15.67",
+  "total": "172.40"
 }

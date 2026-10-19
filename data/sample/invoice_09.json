@@ -1,36 +1,30 @@
 {
   "invoice_number": "INV-2024009",
-  "invoice_date": "2024-12-08",
+  "invoice_date": "2024-07-16",
   "vendor_name": "Maple Leaf Tools",
   "customer_name": "Alpha Retail Ltd",
   "currency": "USD",
   "line_items": [
     {
       "description": "Whiteboard",
-      "quantity": "8",
-      "unit_price": "23.29",
-      "amount": "186.32"
+      "quantity": "2",
+      "unit_price": "21.88",
+      "amount": "43.76"
     },
     {
-      "description": "Office chair",
-      "quantity": "1",
-      "unit_price": "103.45",
-      "amount": "103.45"
+      "description": "Wireless mouse",
+      "quantity": "5",
+      "unit_price": "191.38",
+      "amount": "956.90"
     },
     {
       "description": "Toner cartridge",
-      "quantity": "10",
-      "unit_price": "148.02",
-      "amount": "1480.20"
-    },
-    {
-      "description": "Printer paper (box)",
-      "quantity": "5",
-      "unit_price": "128.41",
-      "amount": "642.05"
+      "quantity": "8",
+      "unit_price": "95.25",
+      "amount": "762.00"
     }
   ],
-  "subtotal": "2412.02",
-  "tax": "241.20",
-  "total": "2653.22"
+  "subtotal": "1762.66",
+  "tax": "176.27",
+  "total": "1938.93"
 }

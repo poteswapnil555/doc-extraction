@@ -2,7 +2,7 @@
   "invoice_number": "INV-2024005",
   "invoice_date": "2024-08-06",
   "vendor_name": "Maple Leaf Tools",
-  "customer_name": "Delta Clinic",
+  "customer_name": null,
   "currency": "USD",
   "line_items": [
     {
