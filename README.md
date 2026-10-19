@@ -71,12 +71,26 @@ On a rate-limited free tier add `--delay SECONDS` (for example `--delay 13` for 
 Progress ("3/20 done") is printed to stderr.
 `--mock` only checks the plumbing (the fake LLM returns the ground truth) and is **not** an accuracy measurement.
 
+**Live run:** model `gemini-3.1-flash-lite` via an OpenAI-compatible endpoint, Tesseract OCR, the 20 synthetic invoices in
+`data/sample/`. The data is synthetic and the set is small, so **these results apply to this test set only**. Raw output: `docs/eval_live.json`.
+
 | Measure (20 synthetic docs, live LLM) | Result |
 |---|---|
-| Field-level accuracy | not yet measured |
-| Fully correct documents | not yet measured |
-| Wrong documents flagged for review | not yet measured |
-| Correct documents flagged unnecessarily | not yet measured |
+| Field-level accuracy | 0.9778 (176 of 180 fields) |
+| Fully correct documents | 16/20 |
+| Documents with no valid output | 0/20 |
+| Wrong documents flagged for review | 4/4 |
+| Correct documents flagged unnecessarily | 1/16 |
+
+Per-field accuracy: invoice_number 1.00, invoice_date 0.90, vendor_name 0.95, customer_name 1.00, currency 1.00,
+subtotal 1.00, tax 1.00, total 1.00, line_items 0.95.
+
+**What the errors were.** `docs/eval_live.json` holds only totals, not per-document details, so this is what the numbers show:
+- There were 4 wrong fields in 4 different documents (one wrong field each): 2 invoice dates, 1 vendor name, 1 line-items list.
+- Money fields (subtotal, tax, total) and customer name, including the documents with no customer or tax line, were all correct.
+- All 4 wrong documents were caught by the review flag. One correct document was flagged unnecessarily.
+- The cause of each error (OCR misread on a degraded scan, or a date-format mix-up) is not recorded, so I am not claiming one.
+  A per-document error log is a next step.
 
 ## Limitations
 - Scanned PDFs without a text layer are not supported by the Tesseract engine (they are flagged for review). Rendering them would need an extra PDF-to-image step.
@@ -88,6 +102,6 @@ Progress ("3/20 done") is printed to stderr.
 - The Docker image has not been built and verified yet.
 
 ## Next steps
-- Record a live evaluation run and fill in the results table.
+- Log per-document errors in the evaluation output to explain each miss.
 - Verify the Docker image; add scanned-PDF support; try the Azure OCR engine.
 - Add more invoice layouts and a small CLI for folders.
