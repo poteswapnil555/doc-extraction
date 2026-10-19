@@ -53,6 +53,13 @@ Tests need no key (they use a fake LLM). One optional live test is skipped unles
 ```powershell
 python -m pytest -q -rs
 ```
+### Docker
+The image was built and a mock evaluation ran inside it (a plumbing check with a fake LLM, **not** a live run and not an accuracy measurement):
+```powershell
+docker build -t doc-extraction .
+docker run --rm --entrypoint python doc-extraction -m doc_extraction.evaluate --mock
+```
+
 Regenerate the sample data: `python -m doc_extraction.synthetic`.
 
 ## Design choices
@@ -102,9 +109,9 @@ subtotal 1.00, tax 1.00, total 1.00, line_items 0.95.
 - Files larger than `MAX_FILE_MB` (default 20) and OCR text longer than 20,000 characters are not processed; they are flagged for review.
 - One bad document never stops a run: empty, corrupt, unsupported or oversized files, empty OCR text, LLM timeouts (`LLM_TIMEOUT_SECONDS`, default 60) and empty or non-JSON LLM replies all become `needs_review` items with a reason. These cases are covered by mock tests only, not by real failures.
 - A timed-out LLM call is not retried by the extractor (only HTTP 429 is retried); the document is flagged.
-- The Docker image has not been built and verified yet.
+- The Docker check below ran in mock mode only; a live (real LLM) run inside the container has not been done.
 
 ## Next steps
 - Run `evaluate --live --out docs/eval_live.json` again: the file now includes per-document details (wrong fields with expected vs predicted values and review reasons), which will explain each miss.
-- Verify the Docker image; add scanned-PDF support; try the Azure OCR engine.
+- Add scanned-PDF support; try the Azure OCR engine; run the live evaluation inside Docker (pass variables with `--env-file`).
 - Add more invoice layouts and a small CLI for folders.
