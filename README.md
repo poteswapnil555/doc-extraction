@@ -16,10 +16,10 @@ Turns invoices (text PDFs or image scans) into strict, validated JSON. Validatio
 ## Architecture
 ```mermaid
 flowchart LR
-    A[PDF / image] --> B{OCR engine\nOCR_ENGINE}
-    B -->|tesseract (default)| C[OCR text]
-    B -->|azure_di (optional)| C
-    C --> D[LLM\nAzure OpenAI or OpenAI-compatible]
+    A[PDF / image] --> B{"OCR engine<br/>OCR_ENGINE"}
+    B -->|"tesseract (default)"| C[OCR text]
+    B -->|"azure_di (optional)"| C
+    C --> D["LLM<br/>Azure OpenAI or OpenAI-compatible"]
     D --> E[JSON parse + pydantic schema]
     E -->|invalid| D
     E -->|valid| F[Grounding + arithmetic checks]
