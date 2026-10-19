@@ -85,12 +85,12 @@ Progress ("3/20 done") is printed to stderr.
 Per-field accuracy: invoice_number 1.00, invoice_date 0.90, vendor_name 0.95, customer_name 1.00, currency 1.00,
 subtotal 1.00, tax 1.00, total 1.00, line_items 0.95.
 
-**What the errors were.** `docs/eval_live.json` holds only totals, not per-document details, so this is what the numbers show:
+**What the errors were.** `docs/eval_live.json` (from the first live run) holds only totals, so this is what the numbers show:
 - There were 4 wrong fields in 4 different documents (one wrong field each): 2 invoice dates, 1 vendor name, 1 line-items list.
 - Money fields (subtotal, tax, total) and customer name, including the documents with no customer or tax line, were all correct.
 - All 4 wrong documents were caught by the review flag. One correct document was flagged unnecessarily.
 - The cause of each error (OCR misread on a degraded scan, or a date-format mix-up) is not recorded, so I am not claiming one.
-  A per-document error log is a next step.
+  Newer runs save per-document details, so a re-run will show the causes.
 
 ## Limitations
 - Scanned PDFs without a text layer are not supported by the Tesseract engine (they are flagged for review). Rendering them would need an extra PDF-to-image step.
@@ -98,10 +98,13 @@ subtotal 1.00, tax 1.00, total 1.00, line_items 0.95.
 - Evaluation uses only 20 synthetic invoices in one layout family; results will not transfer to real documents.
 - Slash-formatted dates are read as day/month/year only.
 - The grounding check confirms a value appears in the OCR text, not that it is the right field, so it can miss swapped fields.
-- Single-page, English, one currency.
+- Single-page, English, one currency (multi-page PDFs are read but not tested).
+- Files larger than `MAX_FILE_MB` (default 20) and OCR text longer than 20,000 characters are not processed; they are flagged for review.
+- One bad document never stops a run: empty, corrupt, unsupported or oversized files, empty OCR text, LLM timeouts (`LLM_TIMEOUT_SECONDS`, default 60) and empty or non-JSON LLM replies all become `needs_review` items with a reason. These cases are covered by mock tests only, not by real failures.
+- A timed-out LLM call is not retried by the extractor (only HTTP 429 is retried); the document is flagged.
 - The Docker image has not been built and verified yet.
 
 ## Next steps
-- Log per-document errors in the evaluation output to explain each miss.
+- Run `evaluate --live --out docs/eval_live.json` again: the file now includes per-document details (wrong fields with expected vs predicted values and review reasons), which will explain each miss.
 - Verify the Docker image; add scanned-PDF support; try the Azure OCR engine.
 - Add more invoice layouts and a small CLI for folders.
