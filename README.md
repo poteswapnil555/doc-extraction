@@ -44,7 +44,8 @@ Configuration is by environment variables only (see `.env.example`):
 
 | Purpose | Variables |
 |---|---|
-| Azure OpenAI (default) | `AZURE_OPENAI_ENDPOINT`, `AZURE_OPENAI_API_KEY`, `AZURE_OPENAI_DEPLOYMENT`, `AZURE_OPENAI_API_VERSION` |
+| Azure OpenAI, key mode (default) | `AZURE_OPENAI_ENDPOINT`, `AZURE_OPENAI_API_KEY`, `AZURE_OPENAI_DEPLOYMENT`, `AZURE_OPENAI_API_VERSION` |
+| Azure OpenAI, sign-in mode (used when `AZURE_OPENAI_API_KEY` is not set) | the same endpoint/deployment/version, plus `AZURE_TENANT_ID`, `AZURE_CLIENT_ID`, `AZURE_CLIENT_SECRET` |
 | Any OpenAI-compatible endpoint | `OPENAI_API_KEY`, `OPENAI_BASE_URL`, `OPENAI_MODEL` |
 | OCR engine | `OCR_ENGINE=tesseract` (default) or `azure_di` (+ `AZURE_DI_ENDPOINT`, `AZURE_DI_KEY`, `pip install -r requirements-azure.txt`) |
 

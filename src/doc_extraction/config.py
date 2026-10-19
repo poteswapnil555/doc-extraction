@@ -9,15 +9,28 @@ def env(name: str, default: str | None = None) -> str | None:
     return value if value else default
 
 
+def azure_auth_mode() -> str | None:
+    """'key' if AZURE_OPENAI_API_KEY is set, else 'token' if the service-principal
+    variables (AZURE_TENANT_ID, AZURE_CLIENT_ID, AZURE_CLIENT_SECRET) are all set, else None."""
+    if not env("AZURE_OPENAI_ENDPOINT"):
+        return None
+    if env("AZURE_OPENAI_API_KEY"):
+        return "key"
+    if env("AZURE_TENANT_ID") and env("AZURE_CLIENT_ID") and env("AZURE_CLIENT_SECRET"):
+        return "token"
+    return None
+
+
 def llm_provider() -> str:
-    """'azure' if Azure variables are set, 'openai' if OPENAI_API_KEY is set."""
-    if env("AZURE_OPENAI_ENDPOINT") and env("AZURE_OPENAI_API_KEY"):
+    """'azure' if Azure endpoint + credentials are set, 'openai' if OPENAI_API_KEY is set."""
+    if azure_auth_mode():
         return "azure"
     if env("OPENAI_API_KEY"):
         return "openai"
     raise RuntimeError(
         "No LLM configured. Set AZURE_OPENAI_ENDPOINT/AZURE_OPENAI_API_KEY/"
-        "AZURE_OPENAI_DEPLOYMENT/AZURE_OPENAI_API_VERSION, or OPENAI_API_KEY (+ optional OPENAI_BASE_URL)."
+        "AZURE_OPENAI_DEPLOYMENT/AZURE_OPENAI_API_VERSION plus AZURE_OPENAI_API_KEY or "
+        "AZURE_TENANT_ID/AZURE_CLIENT_ID/AZURE_CLIENT_SECRET, or OPENAI_API_KEY (+ optional OPENAI_BASE_URL)."
     )
 
 
